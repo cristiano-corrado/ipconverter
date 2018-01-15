@@ -38,13 +38,15 @@ def sort_ip_list(ip_list):
 if __name__ == "__main__":
     # give user option to decide what separator to use to write the list:
     try :
-        userInput = raw_input("what is the separator you would like to add to list? (Eg: comma \",\" newline \"\\n\": ")
-        if userInput.lower() == "coma":
+        userInput = raw_input("what is the separator you would like to add to list? (Eg: comma \",\" newline \""+str(chr(92))+"n\": ")
+        comma=("comma",",")
+        newline=("newline","\\n")
+        if any(s in userInput for s in comma):
             userInput = ","
-            print "Your selection is: ", userInput.lower()
-        elif userInput.lower() == "newline":
-            userInput = "\n"
-            print "Your selection is: ", userInput.lower()
+            print "Your selection is: ", userInput
+        elif  any(s in userInput for s in newline):
+            userInput = '\n'
+            print "Your selection is: newline"
         else:
             userInput = userInput.lower()
             print "Your selection is: ", userInput.lower()
