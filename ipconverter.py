@@ -25,10 +25,7 @@ def validateIP(ip):
 #If , or space or - in line remove and set IP on newline
 def evaluateBadStrings(line):
     if "-" or "," in line:
-        stripper=re.split(r"-|,| ",line)
-        #removes the '' in list found above.
-        stripper = [x for x in stripper if x != '']
-        print stripper
+        stripper=[x for x in re.split(r"-|,| ",line) if x != '']
         for elem in stripper:
             return stripper
     else:
