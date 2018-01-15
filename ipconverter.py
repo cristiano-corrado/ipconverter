@@ -14,6 +14,7 @@ finalFile=str(today.date())+"-ipfile-sanitised.txt"
 
 #Validation for correct IP evaluation
 def validateIP(ip):
+
     ValidIpAddressRegex = re.compile("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")
     if ValidIpAddressRegex.search(ip):
         return True
@@ -23,8 +24,11 @@ def validateIP(ip):
 
 #If , or space or - in line remove and set IP on newline
 def evaluateBadStrings(line):
-    if "-" or ","  in line:
+    if "-" or "," in line:
         stripper=re.split(r"-|,| ",line)
+        #removes the '' in list found above.
+        stripper = [x for x in stripper if x != '']
+        print stripper
         for elem in stripper:
             return stripper
     else:
@@ -57,7 +61,7 @@ if __name__ == "__main__":
                 readFile=open(sys.argv[1],"r").readlines()
                 for elem in readFile:
                     # Remove blank line
-                    if elem.strip() :
+                    if elem.rstrip():
                         # Evaluate - , " " in line passed
                         for ip in evaluateBadStrings(elem.rstrip()):
                             # If the IP matches regex
